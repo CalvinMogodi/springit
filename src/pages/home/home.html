@@ -1,18 +1,43 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle class="logo_text">
+        S
+    </button>
+    <button ion-button menuToggle end>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content style="text-align: center">
+  <img height="50%"  width="100%" src="../../assets/imgs/IMG-20181020-WA0001.jpg">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+  <p class="header">
+    LET US SPRINGIT
   </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <p style="text-align: center">
+    We clean your car to freshest state.<br>
+    We come to your destination, saving <br>
+      you time and money.
+ </p>
+
+  <button ion-button secondary (click)="requst()">Requst your springit</button>
 </ion-content>
+<ion-footer class="background-color">
+    <ion-toolbar class="background-color">
+      <ion-row style="height: 20px;">
+        <ion-col style="text-align: center; text-align: center; border-right: 2px solid darkgray;">
+            <button (click)="register()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+                Register
+            </button>
+        </ion-col>
+        <ion-col style="text-align: center;">
+            <button (click)="login()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+                Login
+            </button>
+          </ion-col>
+      </ion-row>
+        
+    </ion-toolbar>
+  </ion-footer>

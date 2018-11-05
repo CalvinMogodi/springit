@@ -1,0 +1,39 @@
+<!--
+  Generated template for the SelectdatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Date and Time</ion-title>
+  
+      <button ion-button menuToggle end class="logo_text">
+          S
+      </button>
+    </ion-navbar>
+  </ion-header>
+
+<ion-header>
+</ion-header>
+
+
+<ion-content padding style="text-align: center">
+    <p class="center large">Choose a date and time</p>
+
+    <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="request.date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="request.time"></ion-datetime>
+      </ion-item>
+      <button style="margin-top: 20px;" ion-button secondary (click)="proceed()">Proceed</button>
+      <p class="center large">-OR-</p>
+      <button ion-button secondary (click)="proceedwithtoday()">Today | Now</button>
+</ion-content>
