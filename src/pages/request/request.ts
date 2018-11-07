@@ -141,5 +141,4 @@ export class RequestPage {
       this.navCtrl.push(AvaliableservieproviderPage, { request: this.request });
     });
   }
-
 }
