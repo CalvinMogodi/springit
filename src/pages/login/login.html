@@ -10,11 +10,11 @@
     <p class="center" padding>
         <ion-item>
             <ion-label color="primary" floating>Email Address</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="user.email"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label color="primary" floating>Password</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password" [(ngModel)]="user.password"></ion-input>
             </ion-item>
             <button ion-button secondary style="margin-top: 15px;" (click)="login()">Login</button>
     </p> 

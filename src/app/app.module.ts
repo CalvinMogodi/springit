@@ -22,6 +22,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { IonicStorageModule } from '@ionic/storage';
+import { Stripe } from '@ionic-native/stripe';
 
 var config = {
   apiKey: "AIzaSyBJ5h0a3tE_HSF-vnqllbBRqqa8k6W77NQ",
@@ -74,7 +75,8 @@ var config = {
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Stripe
   ]
 })
 export class AppModule {}

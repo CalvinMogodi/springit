@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { SelectcarPage } from '../selectcar/selectcar'
 import { LoginPage } from '../login/login'
 import { SignupPage } from '../signup/signup'
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -10,8 +11,14 @@ import { SignupPage } from '../signup/signup'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  public hidelogins = false;
 
+  constructor(private storage: Storage,public navCtrl: NavController) {
+    storage.get('userLogin').then((val) => {
+      if(val){
+        this.hidelogins = true;
+      }
+    });
   }
 
   requst(){

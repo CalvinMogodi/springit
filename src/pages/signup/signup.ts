@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -43,12 +43,11 @@ export class SignupPage {
       return;
     }
     if (this.user.name != "" && this.user.surname != "" && this.user.address != "" && this.user.email != "" && this.user.phonenumber != "" && this.user.password != "") {
-      this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password).then((newUser) => {
-        const newId = this.db.list('/users').push(this.user);
-        this.navCtrl.setRoot(HomePage);
+      this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password).then((newUser) => {       
         this.user.password = '';
         this.user.confirmPassword = '';
         this.db.list('users').set(newUser.user.uid, this.user);
+        this.navCtrl.setRoot(LoginPage);
       });
     }
   }

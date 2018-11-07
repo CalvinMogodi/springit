@@ -20,11 +20,16 @@ export class SelectdatePage {
     date: '',
     time: '',
   };
+  public max: any;
+  public min = new Date().toJSON().split('T')[0];;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     if (navParams.data.request.carType != null) {
       this.request.carType = navParams.data.request.carType   
     }
+
+    let date = new Date(new Date().getFullYear() + 10 + '-01-01');
+    this.max = new Date(date).toJSON().split('T')[0]
   }
 
   ionViewDidLoad() {

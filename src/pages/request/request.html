@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="text-align: center;">
     <ion-card>
         <img src="{{imgURL}}"/>
         <ion-card-content>
@@ -29,8 +29,52 @@
             Location: {{request.location}}<br>
           </p>
         </ion-card-content>
+        <ion-list>
+          <ion-item>
+          <ion-label>Payment Method</ion-label>
+            <ion-select [(ngModel)]="paymentMethod" (ionChange)="paymentMethodChanged()" style="border-bottom: 1px solid;">
+              <ion-option *ngFor="let method of paymentMethods">{{method}}</ion-option>
+          </ion-select>   
+        </ion-item>
+        </ion-list>
+        <ion-grid *ngIf="showPaymentForm">
+          <ion-row>
+              <input type="text" [(ngModel)]="cardDetails.cardNumber" class="card-number" placeholder="Card Number">
+          </ion-row>
+          <ion-row>
+              <ion-col  class="month-year">
+                  <ion-select [(ngModel)]="cardDetails.expiryMonth"  placeholder="MM" style="margin-top: -5px; padding: 13px 5px 5px 0px;">
+                      <ion-option>01</ion-option>
+                      <ion-option>02</ion-option>
+                      <ion-option>03</ion-option>
+                      <ion-option>04</ion-option>
+                      <ion-option>05</ion-option>
+                      <ion-option>06</ion-option>
+                      <ion-option>07</ion-option>
+                      <ion-option>08</ion-option>
+                      <ion-option>09</ion-option>
+                      <ion-option>10</ion-option>
+                      <ion-option>11</ion-option>
+                      <ion-option>12</ion-option>
+                  </ion-select>   
+              </ion-col>
+              <ion-col class="month-year">
+                  <ion-select [(ngModel)]="cardDetails.expiryYear" placeholder="YYYY" style="margin-top: -5px;padding: 13px 5px 5px 0px;" >
+                      <ion-option *ngFor="let year of years">{{year}}</ion-option>
+                  </ion-select>   
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                  <input type="number" maxlength="3" [(ngModel)]="cardDetails.cvv" class="card-number" placeholder="CVV">
+              </ion-col>
+              <ion-col>
+                  
+              </ion-col>
+          </ion-row>
+      </ion-grid>
         <button *ngIf="!this.searching" ion-button secondary style="margin-top: 15px;" (click)="requestSP()">Request</button>
         <ion-spinner *ngIf="!this.pickedup && this.searching" icon="lines"></ion-spinner>
+        <br><br>
       </ion-card>
-
 </ion-content>
