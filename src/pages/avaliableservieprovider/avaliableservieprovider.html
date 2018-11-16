@@ -5,46 +5,45 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Service Provider </ion-title>
-  
-      <button ion-button menuToggle end class="logo_text">
-          S
-      </button>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle class="logo_text">
+      <img src="../../assets/imgs/header_icon.jpg">
+    </button>
+    <ion-title>Service Provider </ion-title>
+    <button ion-button end menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content padding class="center">
-<p class="center large">Here's your service provider.</p>
-      <img  src="../../assets/imgs/profile.png">
-      <p class="center" style="color:green">"On My Way"<br>
-        {{serviceProvider.cellNumber}} <ion-icon name="call"  (click)="callProvider()" style="color: blue; padding-left: 5px;"></ion-icon><br>
-        {{serviceProvider.name}}
-      </p>
+  <p class="center large">Here's your service provider.</p>
+  <img src="../../assets/imgs/profile.png">
+  <p class="center" style="color:green">"On My Way"<br> {{serviceProvider.cellNumber}} <ion-icon name="call" (click)="callProvider()"
+      style="color: blue; padding-left: 5px;"></ion-icon><br> {{serviceProvider.name}}
+  </p>
 </ion-content>
 
 <ion-footer class="background-color">
-    <ion-toolbar class="background-color">
-      <ion-row style="height: 20px;">
-        <ion-col>
-          <button (click)="cancel()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
-            Cancel
+  <ion-toolbar class="background-color">
+    <ion-row style="height: 20px;">
+      <ion-col>
+        <button (click)="cancel()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+          Cancel
         </button>
-        </ion-col>
-        <ion-col style="text-align: center;">
-            <button (click)="start()" class="linkbutton" *ngIf="!showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
-                Start
-            </button>
-            <button (click)="complete()" class="linkbutton" *ngIf="showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
-              Complete
-          </button>
-            
-          </ion-col>
-      </ion-row>
-        
-    </ion-toolbar>
-  </ion-footer>
+      </ion-col>
+      <ion-col style="text-align: center;">
+        <button (click)="start()" class="linkbutton" *ngIf="!showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+          Start
+        </button>
+        <button (click)="complete()" class="linkbutton" *ngIf="showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+          Complete
+        </button>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-footer>
