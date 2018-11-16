@@ -35,6 +35,9 @@ export class RequestPage {
     active: false,
     pickedup: false,
     paymentMethod: '',
+    status: 'New',
+    spName: '',
+    spId:0,
     coordinates: {latitude: '', longitude:''}
   };
   public cardDetails = {
@@ -43,7 +46,7 @@ export class RequestPage {
     expiryYear: '',
     cvv: ''
   }
-  public providerCloseBy = false;
+  public providerCloseBy = true;
 
   constructor(public geolocation: Geolocation, public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public stripe: Stripe) {
     
@@ -92,7 +95,7 @@ export class RequestPage {
     }
   }
 
-  paywithcard(user){
+  paywithcard(user, spId){
     this.stripe.setPublishableKey('pk_test_tDpVMqID903bo2eKCjQ3ZYkU');
     let card = {
       number: '4242424242424242',
@@ -111,40 +114,53 @@ export class RequestPage {
   requestSP() {
     if(this.paymentMethod != ""){
       this.searching = true;
-    this.providerCloseBy = false;
+    this.providerCloseBy = true;
     this.geolocation.getCurrentPosition().then((resp) => { 
       this.db.database.ref().child('serviceproviders').orderByChild('active').equalTo(true).on('value', snapshot => {
         var result = snapshot.val();
         if (result != null) {
+          let canProcced = false;
+          let thisuser;
+          let thisspId;
           snapshot.forEach(snap => {
             var user = snap.val();
+            let spId = snap.key;
             let distance = this.calculateDistance(this.request.coordinates.latitude,this.request.coordinates.longitude, user.coordinates.latitude, user.coordinates.longitude);
-            if(distance <= 10){
-             
-              if(this.paymentMethod == "Card"){
-                this.paywithcard(user);
-              }
-              else{
-                this.addRequest(user);
-              }              
-              this.providerCloseBy = true;
-            }            
-          });       
+            if(distance <= 10){ 
+              canProcced = true;  
+              thisspId =  spId;
+              thisuser = user;         
+            }  
+          });  
+
+          if(canProcced){
+            if(this.paymentMethod == "Card"){
+              this.paywithcard(thisuser, thisspId);
+            }
+            else{
+              this.addRequest(thisuser, thisspId);
+            }   
+            this.providerCloseBy = true;    
+            this.searching = false;       
+          }else{
+            this.providerCloseBy = false;
+            this.searching = false;
+          }     
         }
       });
      });   
     }    
   }
 
-
-  addRequest(user) {
+  addRequest(user, spId) {
     this.request.active = true;
     this.request.paymentMethod = this.paymentMethod;
+    this.request.spName = user.name;
+    this.request.spId = spId;
     const newId = this.db.list('/requests').push(this.request).key;
-
     this.db.database.ref().child('requests/' + newId).on('value', snapshot => {
       var result = snapshot.val();
-      this.navCtrl.push(AvaliableservieproviderPage, { request: this.request, serviceProvider: user });
+      this.navCtrl.push(AvaliableservieproviderPage, { request: this.request, serviceProvider: user, requestId: newId });
     });
   }
 

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle class="logo_text">
-        S
+      <img src="../../assets/imgs/header_icon.jpg">
     </button>
     <button ion-button menuToggle end>
       <ion-icon name="menu"></ion-icon>
@@ -24,7 +24,7 @@
 
   <button ion-button secondary (click)="requst()">Requst your springit</button>
 </ion-content>
-<ion-footer class="background-color">
+<ion-footer class="background-color" *ngIf="!hidelogins">
     <ion-toolbar class="background-color">
       <ion-row style="height: 20px;">
         <ion-col style="text-align: center; text-align: center; border-right: 2px solid darkgray;">

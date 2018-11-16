@@ -21,9 +21,9 @@
 <ion-content padding class="center">
 <p class="center large">Here's your service provider.</p>
       <img  src="../../assets/imgs/profile.png">
-      <p class="center">"On My Way"<br>
-        {{serviceProvider.cellNumber}}<br>
-        {{serviceProvider.name}} <ion-icon name="call"></ion-icon>
+      <p class="center" style="color:green">"On My Way"<br>
+        {{serviceProvider.cellNumber}} <ion-icon name="call"  (click)="callProvider()" style="color: blue; padding-left: 5px;"></ion-icon><br>
+        {{serviceProvider.name}}
       </p>
 </ion-content>
 
@@ -31,12 +31,18 @@
     <ion-toolbar class="background-color">
       <ion-row style="height: 20px;">
         <ion-col>
-           
+          <button (click)="cancel()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+            Cancel
+        </button>
         </ion-col>
         <ion-col style="text-align: center;">
-            <button (click)="rate()" class="linkbutton" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
-                Rate
+            <button (click)="start()" class="linkbutton" *ngIf="!showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+                Start
             </button>
+            <button (click)="complete()" class="linkbutton" *ngIf="showComplete" ion-button icon-only clear style="margin-top: -15px;color: #ffffff !important;">
+              Complete
+          </button>
+            
           </ion-col>
       </ion-row>
         

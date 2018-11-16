@@ -75,6 +75,9 @@
       </ion-grid>
         <button *ngIf="!this.searching" ion-button secondary style="margin-top: 15px;" (click)="requestSP()">Request</button>
         <ion-spinner *ngIf="!this.pickedup && this.searching" icon="lines"></ion-spinner>
+        <p *ngIf="!providerCloseBy" style="color:red">
+            There's no service provider close to you.
+        </p>
         <br><br>
       </ion-card>
 </ion-content>
