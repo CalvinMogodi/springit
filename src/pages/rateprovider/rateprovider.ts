@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the RateproviderPage page.
@@ -16,7 +17,13 @@ import { HomePage } from '../home/home';
 })
 export class RateproviderPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public serviceProvider = {
+    cellNumber: '',
+    name:''
+  }
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber) {
+    this.serviceProvider = navParams.data.serviceProvider;
   }
 
   ionViewDidLoad() {
@@ -25,6 +32,12 @@ export class RateproviderPage {
 
   submit(){
     this.navCtrl.setRoot(HomePage);
+  }
+
+  callProvider(){
+    this.callNumber.callNumber(this.serviceProvider.cellNumber, true)
+  .then(res => console.log('Launched dialer!', res))
+  .catch(err => console.log('Error launching dialer', err));
   }
 
 }

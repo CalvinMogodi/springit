@@ -34,7 +34,8 @@ export class RequestPage {
     userId: 0,
     active: false,
     pickedup: false,
-    paymentMethod: ''
+    paymentMethod: '',
+    coordinates: {latitude: '', longitude:''}
   };
   public cardDetails = {
     cardNumber: '',
@@ -57,6 +58,7 @@ export class RequestPage {
       this.request.date = navParams.data.request.date;
       this.request.time = navParams.data.request.time;
       this.request.location = navParams.data.request.location;
+      this.request.coordinates = navParams.data.request.coordinates
 
       switch (this.request.carType) {
         case 'Bakkie':
@@ -85,10 +87,12 @@ export class RequestPage {
   paymentMethodChanged(){
     if(this.paymentMethod == "Card"){
       this.showPaymentForm = true;
+    }else{
+      this.showPaymentForm = false;
     }
   }
 
-  paywithcard(){
+  paywithcard(user){
     this.stripe.setPublishableKey('pk_test_tDpVMqID903bo2eKCjQ3ZYkU');
     let card = {
       number: '4242424242424242',
@@ -97,27 +101,31 @@ export class RequestPage {
       cvc: '220'
      };
      
-     this.stripe.createCardToken(card)
-        .then(token => console.log(token.id))
-        .catch(error => console.error(error));
+     this.stripe.createCardToken(card).then(token => 
+      console.log(token.id)
+    ).catch(error => 
+      console.error(error)
+    );
   }
 
   requestSP() {
-    this.searching = true;
+    if(this.paymentMethod != ""){
+      this.searching = true;
     this.providerCloseBy = false;
     this.geolocation.getCurrentPosition().then((resp) => { 
       this.db.database.ref().child('serviceproviders').orderByChild('active').equalTo(true).on('value', snapshot => {
         var result = snapshot.val();
         if (result != null) {
           snapshot.forEach(snap => {
-            let distance = this.calculateDistance(resp.coords.latitude , resp.coords.longitude);
+            var user = snap.val();
+            let distance = this.calculateDistance(this.request.coordinates.latitude,this.request.coordinates.longitude, user.coordinates.latitude, user.coordinates.longitude);
             if(distance <= 10){
-              var user = snap.val();
+             
               if(this.paymentMethod == "Card"){
-                this.paywithcard();
+                this.paywithcard(user);
               }
               else{
-                this.addRequest();
+                this.addRequest(user);
               }              
               this.providerCloseBy = true;
             }            
@@ -125,20 +133,39 @@ export class RequestPage {
         }
       });
      });   
+    }    
   }
 
-  calculateDistance(userLatitude, userLongitude){
-    return 10;
-  }
 
-  addRequest() {
+  addRequest(user) {
     this.request.active = true;
     this.request.paymentMethod = this.paymentMethod;
     const newId = this.db.list('/requests').push(this.request).key;
 
     this.db.database.ref().child('requests/' + newId).on('value', snapshot => {
       var result = snapshot.val();
-      this.navCtrl.push(AvaliableservieproviderPage, { request: this.request });
+      this.navCtrl.push(AvaliableservieproviderPage, { request: this.request, serviceProvider: user });
     });
   }
+
+  calculateDistance(lat1, lon1, lat2, lon2) 
+    {
+      var R = 6371; // km
+      var dLat = this.toRad(lat2-lat1);
+      var dLon = this.toRad(lon2-lon1);
+      lat1 = this.toRad(lat1);
+      lat2 = this.toRad(lat2);
+
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c;
+      return d;
+    }
+
+    // Converts numeric degrees to radians
+    toRad(Value) 
+    {
+        return Value * Math.PI / 180;
+    }
 }

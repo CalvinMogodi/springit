@@ -15,6 +15,8 @@ import { AvaliableservieproviderPage } from '../pages/avaliableservieprovider/av
 import { RateproviderPage } from '../pages/rateprovider/rateprovider'
 import { HistoryPage } from '../pages/history/history';
 import { RequestPage } from '../pages/request/request';
+import { AutocompletePage } from '../pages/autocomplete/autocomplete';
+import { CallNumber } from '@ionic-native/call-number';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -46,7 +48,8 @@ var config = {
     AvaliableservieproviderPage,
     RateproviderPage,
     HistoryPage,
-    RequestPage
+    RequestPage,
+    AutocompletePage
   ],
   imports: [
     BrowserModule,
@@ -69,14 +72,16 @@ var config = {
     AvaliableservieproviderPage,
     RateproviderPage,
     HistoryPage,
-    RequestPage
+    RequestPage,
+    AutocompletePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Stripe
+    Stripe,
+    CallNumber
   ]
 })
 export class AppModule {}

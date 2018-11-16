@@ -19,10 +19,12 @@
 
 
 <ion-content>
+  <ion-list>
     <ion-item>
-        <ion-label color="primary" floating>Location</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+      <ion-input (touchstart)="showAddressModal()" [(ngModel)]="address.place"type="text" placeholder="Pick an address">  
+      </ion-input>
+    </ion-item>
+  </ion-list>
   <div #map id="map"></div>  
 </ion-content>
 <ion-footer class="background-color">

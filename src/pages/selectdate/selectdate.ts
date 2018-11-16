@@ -37,7 +37,15 @@ export class SelectdatePage {
   }
 
   proceedwithtoday(){
-    this.navCtrl.push(SelectmapPage);
+    this.request.date = new Date().getFullYear() + '-' + new Date().getMonth()+ '-' + new Date().getDate();
+    this.request.time = new Date().getHours() + ':' + new Date().getMinutes(); 
+    this.navCtrl.push(SelectmapPage, {request : this.request});
+  }
+
+  dateFormat(){
+    let month = new Date().getMonth();
+    //month.length
+
   }
 
   proceed(){
