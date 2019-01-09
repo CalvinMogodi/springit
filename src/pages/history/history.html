@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle class="logo_text">
+    <button ion-button menuToggle>
       <img src="../../assets/imgs/header_icon.jpg">
     </button>
     <ion-title>My Requests</ion-title> 
@@ -12,9 +12,9 @@
 
 <ion-content style="text-align: center">
   <ion-list>
-    <ion-item class="item" *ngFor="let request of requests" (click)="selectdate('Bakkie')">
+    <ion-item class="item" *ngFor="let request of requests">
       <ion-avatar item-start>
-        <img style="width: 60px;height: 44px;" src="../../assets/imgs/{{request.carType}}.png">
+        <img style="width: 60px;height: 44px;" src="../../assets/imgs/{{request.carType}}1.png">
       </ion-avatar>
       <h2>{{request.status}}</h2>
       <p>{{request.spName}}</p>

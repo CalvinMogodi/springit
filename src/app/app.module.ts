@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule , Pipe} from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -17,7 +17,9 @@ import { HistoryPage } from '../pages/history/history';
 import { RequestPage } from '../pages/request/request';
 import { AutocompletePage } from '../pages/autocomplete/autocomplete';
 import { CallNumber } from '@ionic-native/call-number';
+import { CardpaymentPage } from '../pages/cardpayment/cardpayment';
 
+import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
@@ -49,11 +51,12 @@ var config = {
     RateproviderPage,
     HistoryPage,
     RequestPage,
-    AutocompletePage
+    AutocompletePage,
+    CardpaymentPage,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    HttpModule,    IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule, // for database
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
@@ -73,7 +76,8 @@ var config = {
     RateproviderPage,
     HistoryPage,
     RequestPage,
-    AutocompletePage
+    AutocompletePage,
+    CardpaymentPage
   ],
   providers: [
     StatusBar,

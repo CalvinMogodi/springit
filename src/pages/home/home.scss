@@ -1,4 +1,24 @@
 page-home {
+@media only screen and (min-width: 600px) {
+    .forTablets{
+        display: block;
+    }
+
+    .forPhones{
+        display: none;
+    }
+}
+    
+@media only screen and (max-width: 600px) {
+    .forTablets{
+        display: none
+    }
+
+    .forPhones{
+        display: block;
+    }
+}
+
 .logo_text{
     border-color: blue;
     border: 1px blue solid;
@@ -11,6 +31,10 @@ page-home {
     background: #194794;    
 }
 
+.toolbar-background{
+    background: #194794;
+} 
+
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
     color: #FFFFFF;
 }
@@ -20,4 +44,33 @@ page-home {
     font-size: medium;
     font-weight: 500;
 }
+
+.speech-bubble-android .toast-wrapper:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    width: 0;
+    height: 50%;
+    border: 20px solid transparent;
+    border-top-color: black;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+  }
+  .speech-bubble-ios .toast-wrapper:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: black;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -5px;
+    margin-bottom: -10px;
+  }
 }

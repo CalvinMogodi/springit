@@ -10,6 +10,10 @@ page-login {
     .toolbar-background-md {
         background: #194794;    
     }
+
+    .toolbar-background{
+        background: #194794;
+    }
     
     .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
         color: #FFFFFF;
@@ -17,5 +21,13 @@ page-login {
 
     .center{
         text-align: center;
+    }
+
+    .toolbar-title-md {
+        color: white;
+    }
+
+    .white{
+        color: white;
     }
 }

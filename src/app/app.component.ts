@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Storage } from '@ionic/storage';
 import { HistoryPage } from '../pages/history/history';
 import { HomePage } from '../pages/home/home';
 
@@ -16,15 +16,17 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public storage: Storage, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'My Requests', component: HistoryPage }
+      { title: 'Home', component: HomePage },     
     ];
-
+    this.storage.get('userId').then((val) => {
+      if (val) {
+        this.pages.push( { title: 'My Requests', component: HistoryPage });
+      }});
   }
 
   initializeApp() {

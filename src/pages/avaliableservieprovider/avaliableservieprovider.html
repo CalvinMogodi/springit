@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle class="logo_text">
+    <button ion-button menuToggle>
       <img src="../../assets/imgs/header_icon.jpg">
     </button>
     <ion-title>Service Provider </ion-title>
@@ -21,7 +21,8 @@
 <ion-content padding class="center">
   <p class="center large">Here's your service provider.</p>
   <img src="../../assets/imgs/profile.png">
-  <p class="center" style="color:green">"On My Way"<br> {{serviceProvider.cellNumber}} <ion-icon name="call" (click)="callProvider()"
+  <p class="center" style="color:green">"On My Way" </p> 
+  <p> {{serviceProvider.cellNumber}} <ion-icon name="call" (click)="callProvider()"
       style="color: blue; padding-left: 5px;"></ion-icon><br> {{serviceProvider.name}}
   </p>
 </ion-content>

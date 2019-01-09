@@ -1,0 +1,29 @@
+<!--
+  Generated template for the CardpaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary">Cancel</span>
+      </button>
+    </ion-buttons>
+    <ion-title>Card Payment</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="done()">
+        <span ion-text color="primary">Done</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <a href="https://www.payfast.co.za/eng/process?cmd=_paynow&amp;receiver=12531157&amp;item_name=Car+Wash&amp;amount=1.00"><img src="https://www.payfast.co.za/images/buttons/light-small-paynow.png" width="165" height="36" alt="Pay" title="Pay Now with PayFast" /></a>-->
+  <iframe width="100%" height="100%" frameborder="0" *ngIf="frame0" src="https://www.payfast.co.za/eng/process?cmd=_paynow&amp;receiver=12531157&amp;item_name=Car+Wash&amp;amount=60.00" allowfullscreen></iframe>
+  <iframe width="100%" height="100%" frameborder="0" *ngIf="frame1" src="https://www.payfast.co.za/eng/process?cmd=_paynow&amp;receiver=12531157&amp;item_name=Car+Wash&amp;amount=70.00" allowfullscreen></iframe>
+  <iframe width="100%" height="100%" frameborder="0" *ngIf="frame2" src="https://www.payfast.co.za/eng/process?cmd=_paynow&amp;receiver=12531157&amp;item_name=Car+Wash&amp;amount=100.00" allowfullscreen></iframe>
+</ion-content>

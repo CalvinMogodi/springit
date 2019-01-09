@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -21,8 +21,8 @@ export class LoginPage {
     email: '',
     password: '',
   };
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public afAuth: AngularFireAuth) {
+  public showError = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public afAuth: AngularFireAuth, public loadingCtrl: LoadingController) {
 
   }
 
@@ -31,16 +31,29 @@ export class LoginPage {
   }
 
   login() {
-
+    this.showError = false;
     if (this.user.email != "" && this.user.password != "") {
+      var loader = this.loadingCtrl.create({
+        content: "Please wait..."
+    });
+
+    loader.present();
       this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password).then((newUser) => {
+        loader.dismiss();
         if (newUser) {
           this.storage.set('userLogin', true);
           this.storage.set('userId', newUser.user.uid);
+          window.location.reload();
           this.navCtrl.setRoot(HomePage);
+          this.showError = false;
         } else {
           this.storage.set('userLogin', false);
+          this.showError = true;
         }
+      }).catch(error => {
+        loader.dismiss();
+        this.storage.set('userLogin', false);
+        this.showError = true;        
       });
     }
   }
