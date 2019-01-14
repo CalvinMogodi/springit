@@ -21,7 +21,6 @@ export class HistoryPage {
 
   constructor(private zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, private storage: Storage) {
     storage.get('userId').then((val) => {
-      val = "eSSHR8AT00aNwZFgZTJWoLjd6Uo1";
       if(val){
         this.db.database.ref().child('requests').orderByChild('userId').equalTo(val).on('value', snapshot => {
           var result = snapshot.val();
